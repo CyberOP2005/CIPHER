@@ -415,3 +415,42 @@ FROM FARES F
 JOIN FLIGHTS FL ON F.FL_NO = FL.FL_NO
 WHERE F.FARE < (SELECT FARE FROM FARES WHERE FL_NO = 'IC701');
 
+import pandas as pd
+
+# Given CSV data
+data = {
+    'Roll': [10, 15, 20, 25, 30, 32],
+    'Name': ['Parveen', 'Nikita', 'Subhradeepta', 'Yogesh Kumar', 'Rahul Raj', 'Asutosh'],
+    'Class': ['XII-A', 'XII-B', 'XII-A', 'XII-B', 'XII-C', 'XII_A'],
+    'Dofb': ['2002-10-12', '2002-08-10', '2003-05-18', None, '2003-01-31', '2003-06-01'],
+    'Mark': [98.5, 95.5, 90.5, 73.25, 70.25, 78.25]
+}
+
+# Create a DataFrame
+df = pd.DataFrame(data)
+
+# (i) Display details of the students of class XII-A
+class_xii_a = df[df['Class'] == 'XII-A']
+print("(i) Details of students of class XII-A:\n", class_xii_a)
+
+# (ii) Display details of students whose mark is between 80 to 95
+mark_between_80_95 = df[(df['Mark'] >= 80) & (df['Mark'] <= 95)]
+print("\n(ii) Details of students with mark between 80 to 95:\n", mark_between_80_95)
+
+# (iii) Display Roll, Name, and Mark where Dofb is not given
+missing_dofb = df[df['Dofb'].isnull()][['Roll', 'Name', 'Mark']]
+print("\n(iii) Roll, Name, and Mark where Dofb is not given:\n", missing_dofb)
+
+# (iv) Display details of students whose name starts with 'N'
+name_starts_with_n = df[df['Name'].str.startswith('N')]
+print("\n(iv) Details of students whose name starts with 'N':\n", name_starts_with_n)
+
+# (v) Change the column name Dofb to Date_of_birth
+df.rename(columns={'Dofb': 'Date_of_birth'}, inplace=True)
+print("\n(v) DataFrame with column name changed to 'Date_of_birth':\n", df)
+
+# (vi) Bring the column 'Mark' after 'Name'
+df = df[['Roll', 'Name', 'Mark', 'Class', 'Date_of_birth']]
+print("\n(vi) DataFrame with column 'Mark' moved after 'Name':\n", df)
+
+
