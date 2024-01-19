@@ -146,3 +146,208 @@ plt.ylabel('Function Values')
 plt.legend()
 
 plt.show()
+
+
+DATAFRAME 
+
+import pandas as pd
+
+# Given data
+data = {
+    'City': ['Delhi', 'Mumbai', 'Kolkata', 'Chennai'],
+    'Population': [10256389, 25362984, 13568479, 18562495],
+    'Hospitals': [145, 208, 145, 200],
+    'Schools': [870, 1563, 650, 748]
+}
+
+# (a) Display no of schools and hospitals city wise
+df = pd.DataFrame(data)
+citywise_stats = df[['City', 'Schools', 'Hospitals']]
+print("(a) City-wise Schools and Hospitals:\n", citywise_stats, "\n")
+
+# (b) Display the population and no of hospitals for Delhi and Kolkata
+delhi_kolkata_stats = df.loc[df['City'].isin(['Delhi', 'Kolkata']), ['City', 'Population', 'Hospitals']]
+print("(b) Population and Hospitals for Delhi and Kolkata:\n", delhi_kolkata_stats, "\n")
+
+# (c) Add a column police station with the given data
+police_station_data = [2500, 2145, 2396, 1875]
+df['PoliceStation'] = police_station_data
+print("(c) DataFrame with Police Station column:\n", df, "\n")
+
+# (d) Rename the column Schools to GovtSchools
+df.rename(columns={'Schools': 'GovtSchools'}, inplace=True)
+print("(d) DataFrame with renamed column:\n", df)
+
+
+
+
+DATAFRAME
+
+import pandas as pd
+
+# Given data
+data = {
+    'Year1': [35000, 22000, 23000, 31000],
+    'Year2': [42000, 32000, 42000, 40000],
+    'Year3': [36000, 15000, 65000, 50000]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data, index=['Qtr1', 'Qtr2', 'Qtr3', 'Qtr4'])
+
+# (a) Display Quarter wise total sale after showing year wise sale
+quarter_wise_total = df.copy()
+quarter_wise_total['Total Sale'] = df.sum(axis=1)
+print("(a) Quarter-wise total sale after showing year-wise sale:\n", quarter_wise_total, "\n")
+
+# (b) Display year wise total sale after showing quarter wise sale
+year_wise_total = df.copy()
+year_wise_total.loc['Total Sale'] = df.sum()
+print("(b) Year-wise total sale after showing quarter-wise sale:\n", year_wise_total, "\n")
+
+# (c) Find maximum sale in Year2 and minimum sales in Year3
+max_sale_year2 = df['Year2'].max()
+min_sale_year3 = df['Year3'].min()
+print(f"(c) Maximum sale in Year2: {max_sale_year2}, Minimum sale in Year3: {min_sale_year3}\n")
+
+# (d) Find the year for maximum sale and minimum sale in Qtr3
+max_sale_qtr3_year = df.loc['Qtr3'].idxmax()
+min_sale_qtr3_year = df.loc['Qtr3'].idxmin()
+print(f"(d) Year for maximum sale in Qtr3: {max_sale_qtr3_year}, Year for minimum sale in Qtr3: {min_sale_qtr3_year}")
+
+
+
+import pandas as pd
+
+# Given data
+sales_data = [
+    {'Zone name': 'ZoneA', 'Target': 750000, 'Sales': 800000, 'No of employees': 12},
+    {'Zone name': 'ZoneB', 'Target': 600000, 'Sales': 700000, 'No of employees': 15},
+    {'Zone name': 'ZoneC', 'Target': 850000, 'Sales': 800000, 'No of employees': 16},
+    {'Zone name': 'ZoneD', 'Target': 900000, 'Sales': 840000, 'No of employees': 13}
+]
+
+# Create DataFrame
+df = pd.DataFrame(sales_data)
+df.set_index('Zone name', inplace=True)  # Set Zone name as row labels
+
+# (a) Display Zone name and target
+zone_target = df[['Target']]
+print("(a) Zone name and Target:\n", zone_target, "\n")
+
+# (b) Display the Target and No of Employees for ZoneB and ZoneD
+zoneb_zoned_stats = df.loc[['ZoneB', 'ZoneD'], ['Target', 'No of employees']]
+print("(b) Target and No of Employees for ZoneB and ZoneD:\n", zoneb_zoned_stats, "\n")
+
+# (c) Delete the column No of employees from the dataframe
+df.drop('No of employees', axis=1, inplace=True)
+print("(c) DataFrame with No of employees column deleted:\n", df, "\n")
+
+# (d) Rename the row ZoneC to SectorC and ZoneD to SectorD
+df.rename(index={'ZoneC': 'SectorC', 'ZoneD': 'SectorD'}, inplace=True)
+print("(d) DataFrame with renamed rows:\n", df)
+
+
+
+SQL
+CREATE TABLE Student (
+    Roll INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Class VARCHAR(10),
+    Dofb DATE,
+    Mark FLOAT
+);
+
+INSERT INTO Student VALUES
+(10, 'Parveen', 'XII-A', '2002-10-12', 98.5),
+(15, 'Nikita', 'XII-B', '2002-08-10', 95.5),
+(20, 'Subhradeepta', 'XII-A', '2003-05-18', 90.5),
+(25, 'Yogesh Kumar', 'XII-B', NULL, 73.25),
+(30, 'Rahul Raj', 'XII-C', '2003-01-31', 70.25),
+(32, 'Asutosh', 'XII_A', '2003-06-01', 78.25);
+
+import mysql.connector
+from mysql.connector import Error
+
+# Function to create a connection to MySQL
+def create_connection():
+    connection = None
+    try:
+        connection = mysql.connector.connect(
+            host='your_host',
+            database='your_database',
+            user='your_user',
+            password='your_password'
+        )
+        if connection.is_connected():
+            print("Connected to MySQL database")
+        return connection
+    except Error as e:
+        print(f"Error: {e}")
+        return None
+
+# Function to execute a query
+def execute_query(connection, query):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return result
+
+# Connect to MySQL
+conn = create_connection()
+
+# (i) Display details of the students of class XII-A
+query_i = "SELECT * FROM Student WHERE Class = 'XII-A';"
+result_i = execute_query(conn, query_i)
+print("(i) Students of Class XII-A:\n", result_i)
+
+# (ii) Display Details of the students whose mark is between 80 to 95 both the limits are included
+query_ii = "SELECT * FROM Student WHERE Mark BETWEEN 80 AND 95;"
+result_ii = execute_query(conn, query_ii)
+print("\n(ii) Students with Marks between 80 and 95:\n", result_ii)
+
+# (iii) Display Roll, Name, and mark where dofb is not given
+query_iii = "SELECT Roll, Name, Mark FROM Student WHERE Dofb IS NULL;"
+result_iii = execute_query(conn, query_iii)
+print("\n(iii) Students with Dofb not given:\n", result_iii)
+
+# (iv) Display details of the students whose name starts with ‘N’
+query_iv = "SELECT * FROM Student WHERE Name LIKE 'N%';"
+result_iv = execute_query(conn, query_iv)
+print("\n(iv) Students whose name starts with 'N':\n", result_iv)
+
+# (v) Change the column name dofb to Date_of_birth
+query_v = "ALTER TABLE Student CHANGE COLUMN Dofb Date_of_birth DATE;"
+execute_query(conn, query_v)
+print("\n(v) Column name 'dofb' changed to 'Date_of_birth'.")
+
+# (vi) Bring the column mark after Name
+query_vi = "ALTER TABLE Student MODIFY COLUMN Mark FLOAT AFTER Name;"
+execute_query(conn, query_vi)
+print("\n(vi) Column order updated.")
+
+
+MySQL 
+SELECT * FROM Employee WHERE Salary BETWEEN 70000 AND 90000;
+SELECT Eno, Name, Desi FROM Employee WHERE Dept = 'Civil';
+UPDATE Employee SET Salary = Salary * 1.2 WHERE Salary < 80000;
+DELETE FROM Employee WHERE Name = 'Om Pangi';
+SELECT Name, IFNULL(Dept, 'new employee') AS Department FROM Employee;
+
+
+MySQL
+SELECT E.Ename, D.Job, D.Deptno, E.Gross
+FROM EMPLOYEE E
+JOIN DEPT D ON E.Ecode = D.Ecode
+WHERE D.Commission IS NULL;
+
+CREATE VIEW itax AS
+SELECT Ecode, Ename, Job, Gross * 0.1 AS Tax
+FROM EMPLOYEE
+WHERE Gross >= 25000;
+
+SELECT Ename, Gross
+FROM EMPLOYEE
+WHERE Gross > (SELECT Gross FROM EMPLOYEE WHERE Ename = 'Kartik')
+ORDER BY Ename DESC;
+
