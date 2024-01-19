@@ -103,3 +103,23 @@ print('Data frame taking data from the csv file')
 print(df)
 df.plot(x='sport',y='Competition',kind='line')
 
+HISTOGRAM
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Given marks data
+marks = [56,78,92,67,56,78,90,45,34,56,27,58,30,40,50,60,70,80,30,40,50,60,70,70,80,45,55,65,45,65]
+
+# Set the number of bins
+num_bins = 20
+
+# Create the histogram
+plt.hist(marks, bins=num_bins, edgecolor='black')
+
+# Set the title and labels
+plt.title('Distribution of Marks in Mathematics Test')
+plt.xlabel('Marks')
+plt.ylabel('Frequency')
+
+# Show the plot
+plt.show()
