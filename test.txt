@@ -123,3 +123,26 @@ plt.ylabel('Frequency')
 
 # Show the plot
 plt.show()
+
+
+Q5
+import numpy as np
+import matplotlib.pyplot as plt
+
+ab = [1, 7, 21, 35, 35, 21, 7, 1]
+
+sin_ab = np.sin(ab)
+cos_ab = np.cos(ab)
+tan_ab = np.tan(ab)
+
+plt.plot(ab, sin_ab, label='sin(ab)', color='cyan')
+plt.plot(ab, cos_ab, label='cos(ab)', color='red')
+plt.plot(ab, tan_ab, label='tan(ab)', color='black', linestyle="dashed")
+
+plt.title('Trigonometric Functions of ab')
+plt.xlabel('ab')
+plt.ylabel('Function Values')
+
+plt.legend()
+
+plt.show()
