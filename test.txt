@@ -1,1 +1,105 @@
+Answer:
+import matplotlib.pyplot as plt
+import numpy as np
+ab=[1,7,21,35,35,21,7,1]
+s=np.sin(ab)
+c=np.cos(ab)
+t=np.tan(ab)
+plt.plot(ab,s,'c',label='sine')
+plt.plot(ab,c,'r',label='cosine')
+plt.plot(ab,t,'k',linestyle='dashed',label='tan')
+plt.legend(loc=1)
+plt.title('sine,cos and tan chart')
+plt.xlabel('Values')
+plt.ylabel('sin,cos,tan')
+
+
+Q1.
+import matplotlib.pyplot as plt
+import numpy as np
+A=np.arange(1,20,1.25)
+B=np.log(A)
+C=np.log10(A)
+plt.plot(A,B,'ro',label='log')
+plt.plot(A,C,'b^',label='log10')
+
+plt.legend(loc=2)
+plt.title('log and log10')
+plt.xlabel('random values')
+plt.ylabel('log and log10 values')
+
+Q3.
+import matplotlib.pyplot as plt
+import numpy as np
+subject=['English','Acct','Bst','Ip','Math']
+mark=[[67,87,99,56,70],[90,87,54,39,80],[56,67,78,89,90]]
+x=np.arange(len(subject))
+plt.bar(x,mark[0],color='r',width=0.25,label='student1')
+plt.bar(x+0.25,mark[1],color='b',width=0.25,label='student2')
+plt.bar(x+0.5,mark[2],color='g',width=0.25,label='student3')
+plt.legend(loc=2)
+plt.title('Result analysis')
+plt.xlabel('subject')
+plt.ylabel('marks')
+plt.xticks(x,subject)
+
+
+Q5. 
+import matplotlib.pyplot as plt
+import numpy as np
+country=['Australi','Canada','India','England','SouthAfrica']
+
+gold=[42,12,65,40,40]
+Silver=[36,24,46,36,50]
+Bronze=[50,60,50,58,46]
+Total=[128,96,161,134,136]
+
+x=np.arange(len(country))
+plt.bar(x,gold,color='r',width=0.25,label='Gold')
+plt.bar(x+0.25,Silver,color='b',width=0.25,label='Silver')
+plt.bar(x+0.50,Bronze,color='g',width=0.25,label='Bronze')
+plt.bar(x+0.75,Total,color='y',width=0.25,label='Total')
+
+plt.legend(loc=2)
+plt.title('Medal tally')
+plt.xlabel('Country')
+plt.ylabel('Medal')
+plt.xticks(x,country)
+
+Q5. 
+import matplotlib.pyplot as plt
+import numpy as np
+medal=['Gold','Silver','Bronze','Total']
+australia=[42,36,50,128]
+Canada=[12,24,60,96]
+India=[65,46,50,161]
+England=[40,36,58,134]
+SouthAfrica=[40,50,46,136]
+x=np.arange(len(medal))
+plt.bar(x,australia,color='r',width=0.25,label='Australia')
+plt.bar(x+0.25,Canada,color='b',width=0.25,label='Canada')
+plt.bar(x+0.50,India,color='g',width=0.25,label='India')
+plt.bar(x+0.75,England,color='y',width=0.25,label='England')
+plt.bar(x+1.0,SouthAfrica,color='m',width=0.25,label='SouthAfrica')
+plt.legend(loc=2)
+plt.title('Medal tally')
+plt.xlabel('Madal')
+plt.ylabel('Counytry')
+plt.xticks(x,medal)
+CSV
+
+import pandas as pd
+df=pd.read_csv("D:\\marks.csv",names=['Name','Mark1','Mark2','Mark3'])
+print('Data frame taking data from the csv file')
+print(df)
+df['Total']=df['Mark1']+df['Mark2']+df['Mark3']
+df['Average']=df['Total']/3 
+print(df)
+Q2.
+import pandas as pd
+
+df=pd.read_csv("D:\\sports.csv",skiprows=1,sep='\t',names=['sport','Competition','Prizeon'])
+print('Data frame taking data from the csv file')
+print(df)
+df.plot(x='sport',y='Competition',kind='line')
 
